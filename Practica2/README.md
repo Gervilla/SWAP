@@ -12,7 +12,7 @@ Para este ejemplo crearemos un archivo comprimido con `tar`, y concatenaremos co
 
 `tar czf - /var/www | ssh gervilla@192.168.1.112 'cat > ~/tar.gz`.
 
-![img](https://github.com/Gervilla/SWAP/blob/master/Practica2\images\1_tar_ssh.PNG)
+![img](https://github.com/Gervilla/SWAP/blob/master/Practica2/images/1_tar_ssh.PNG)
 
 Aqui vemos como la maquina 1 crea el archivo y lo envia por ssh a la otra maquina exitosamente, y luego se hace un ssh para acceder a la otra maquina y probar que el archivo se ha enviado correctamente.
 
@@ -28,7 +28,7 @@ Una vez hecho esto probaremos a sincronizar en la maquina2 (sera la que pida la 
 
 `rsync -avz -e ssh 192.168.1.111:/var/www /var/www`
 
-![img](https://github.com/Gervilla/SWAP/blob/master/Practica2\images\2_rsync.PNG)
+![img](https://github.com/Gervilla/SWAP/blob/master/Practica2/images/2_rsync.PNG)
 
 Funciona correctamente, salvo que si miramos dentro del directorio `/var/www` de la maquina 2, vemos que hay otro directorio `www`. Para evitar esto y que mezcle ambos directorios, dejaremos la orden asi:
 
@@ -36,7 +36,7 @@ Funciona correctamente, salvo que si miramos dentro del directorio `/var/www` de
 
 Podemos usar la opcion `--delete` para que tambien sincronize lo que se borra en la maquina 1, asi ademas borrariamos el directorio `www` sobrante de la maquina dos hecho anteriormente.
 
-![img](https://github.com/Gervilla/SWAP/blob/master/Practica2\images\3_rsync2.PNG)
+![img](https://github.com/Gervilla/SWAP/blob/master/Practica2/images/3_rsync2.PNG)
 
 Vemos como se ha creado un archivo `aaaaaaaaaaaa` en la maquina 1 y al ejecutar `rsync` en la 2 queda copiado.
 
@@ -50,14 +50,14 @@ Generaremos primero las claves publica y privada usando la siguiente orden en la
 
 Nos pedira que rellenemos unos campos, nosotros dejaremos en blanco todos. Despues de esto nos saldra una imagen similar a esta:
 
-![img](https://github.com/Gervilla/SWAP/blob/master/Practica2\images\4_keygen.PNG)
+![img](https://github.com/Gervilla/SWAP/blob/master/Practica2/images/4_keygen.PNG)
 
 Luego, para mandarle las claves publicas a las maquinas contrarias ejecutaremos:
 
 `ssh-copy-id gervilla@192.168.1.112` en la maquina 1.
 `ssh-copy-id gervilla@192.168.1.111` en la maquina 2.
 
-![img](https://github.com/Gervilla/SWAP/blob/master/Practica2\images\5_copyID.PNG)
+![img](https://github.com/Gervilla/SWAP/blob/master/Practica2/images/5_copyID.PNG)
 
 Nos pedira que introduzcamos la contraseña, pero esta sera la ultima vez.
 
@@ -65,13 +65,13 @@ Nos pedira que introduzcamos la contraseña, pero esta sera la ultima vez.
 
 Cron nos permite ejecutar procesos y ordenes de forma periodica y automatica en los momentos que le indiquemos. Para ello abriremos y editaremos el fichero `/etc/crontab`.
 
-![img](https://github.com/Gervilla/SWAP/blob/master/Practica2\images\6_crontab.PNG)
+![img](https://github.com/Gervilla/SWAP/blob/master/Practica2/images/6_crontab.PNG)
 
 En mi caso he puesto que a cada minuto de cada hora de cada dia y cada mes, de cada semana, el usuario gervilla va a ejecutar un rsync como el qu hemos visto mas atras.
 
 `* *    * * *   gervilla rsync -avz --delete -e ssh 192.168.1.111:/var/www /var`
 
-![img](https://github.com/Gervilla/SWAP/blob/master/Practica2\images\7_crontab2.PNG)
+![img](https://github.com/Gervilla/SWAP/blob/master/Practica2/images/7_crontab2.PNG)
 
 En este ejemplo he creado un archivo en la maquina 1 `copiamePorfi` y hemos borrado el archivo `aaaaaaaaaaa`. Al minuto, ambas cosas se han visto reflejadas en la maquina 2, el crontab funciona correctamente.
 
