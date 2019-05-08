@@ -1,2 +1,0 @@
-#Practica 2
-
