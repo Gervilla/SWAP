@@ -47,5 +47,10 @@ A partir de ahora desde nuestra maquina cliente podremos hacer peticiones por HT
 
 ## Cortafuegos: Script iptables
 
-...
+Escribimos un script sencillo de iptables:
 
+![img](https://github.com/Gervilla/SWAP/blob/master/Practica4/images/8_.PNG)
+
+lo arrancamos y comprobamos que funciona correctamente con `iptables –L –n -v`.
+
+Final de la practica 4.
