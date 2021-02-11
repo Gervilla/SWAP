@@ -4,3 +4,7 @@ En esta practica veremos como hacer copias de seguridad de nuestras bases de dat
 
 ## Creacion e insercion de base de datos
 
+## Replicar la base de datos
+
+## Replicación de BD mediante maestro-esclavo
+
